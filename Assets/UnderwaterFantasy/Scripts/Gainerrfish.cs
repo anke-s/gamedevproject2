@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gainerrfish : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class Gainerrfish : MonoBehaviour
     private Vector2 screenBounds;
 
     bool isFollowFish;
-
+    //public Text countText;
+    public GameObject countText;
+    //private int score;
 
     #region Private Variables
     private float horizontalBound;
@@ -39,6 +42,8 @@ public class Gainerrfish : MonoBehaviour
             Random.Range(-verticalBound, verticalBound));
 
         transform.position = startingPosition;
+        countText = GameObject.FindGameObjectsWithTag("Text")[0];
+  
 
     }
    
@@ -63,6 +68,10 @@ public class Gainerrfish : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             isFollowFish = true;
+            MovePlayer.updateScore();
+            countText.GetComponent<Text>().text = MovePlayer.getScore().ToString();
         }
     }
+
+   
 }
